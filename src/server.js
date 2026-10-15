@@ -16,10 +16,22 @@ const app = express();
 connectDB();
 
 // Middleware
+const allowedOrigins = [
+  "https://threadsrepublic.com",
+  "https://www.threadsrepublic.com",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: "https://backendthreadsrepublic-production.up.railway.app",
-    credentials: true,
+    origin: function (origin, callback) {
+      // Allow requests without an Origin header, such as server-to-server requests.
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
   })
 );
 
