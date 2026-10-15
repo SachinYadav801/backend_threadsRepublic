@@ -18,7 +18,7 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "https://backendthreadsrepublic-production.up.railway.app/api/products",
+    origin: "https://backendthreadsrepublic-production.up.railway.app",
     credentials: true,
   })
 );
